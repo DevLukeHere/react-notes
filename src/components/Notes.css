@@ -1,5 +1,7 @@
 .table {
   margin: 1rem auto;
+  width: 40%;
+  table-layout: fixed;
 }
 
 .filter-buttons {
@@ -16,4 +18,12 @@
 
 .add-note-button {
   margin-left: 1rem;
+}
+
+tr {
+  word-break: break-all;
+}
+
+body {
+  background-color: beige;
 }

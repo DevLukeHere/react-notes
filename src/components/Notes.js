@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Notes.css";
 
 function Notes() {
@@ -46,6 +46,23 @@ function Notes() {
 
     setActiveNotes(filteredNotes);
   };
+
+  useEffect(() => {
+    const filteredActiveNotes = notes.filter((note) => {
+      return note.status.toLowerCase() === "active";
+    });
+
+    const filteredCompletedNotes = notes.filter((note) => {
+      return note.status.toLowerCase() === "completed";
+    });
+
+    setActiveNotes(filteredActiveNotes);
+    setCompletedNotes(filteredCompletedNotes);
+
+    return () => {
+      //
+    };
+  }, [notes]);
 
   const handleClickCompleted = () => {
     setTab("completed");
@@ -124,21 +141,21 @@ function Notes() {
             tab === "active"
               ? activeNotes.map((activeNote, index) => (
                   <tr key={index}>
-                    <td>{activeNote.name}</td>
-                    <td>{activeNote.status}</td>
+                    <td className="note-name">{activeNote.name}</td>
+                    <td className="note-status">{activeNote.status}</td>
                   </tr>
                 ))
               : tab === "completed"
               ? completedNotes.map((completedNote, index) => (
                   <tr key={index}>
-                    <td>{completedNote.name}</td>
-                    <td>{completedNote.status}</td>
+                    <td className="note-name">{completedNote.name}</td>
+                    <td className="note-status">{completedNote.status}</td>
                   </tr>
                 ))
               : notes.map((note, index) => (
                   <tr key={index}>
-                    <td>{note.name}</td>
-                    <td>{note.status}</td>
+                    <td className="note-name">{note.name}</td>
+                    <td className="note-status">{note.status}</td>
                   </tr>
                 ))
             // : notes
